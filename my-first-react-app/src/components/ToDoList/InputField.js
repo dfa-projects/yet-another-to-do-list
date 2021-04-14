@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import initialState from "./initialState.js"
+import Display from './display.js';
 
 class InputField extends Component{
     constructor(props) {
@@ -7,12 +8,12 @@ class InputField extends Component{
         this.state = initialState
         this.saver = this.saver.bind(this)
         this.clear = this.clear.bind(this)
-        this.displayList = this.displayList.bind(this)
     }
 
     saver(event) {
-        let newItem = {text: this.input.value, key: Date.now()}
-        this.setState((previousState) => {return {items: previousState.items.concat(newItem)}})
+        const oldtodos = this.state.items;
+        oldtodos.push(this.input.value);
+        this.setState({items: oldtodos});
         this.input.value = ""
         event.preventDefault()
     }
@@ -23,25 +24,18 @@ class InputField extends Component{
 
 
     render() {
-        return (<div>
+        return (
+        <div>
             <form onSubmit={this.saver}>
-            <input type="text" id="ToDo" ref={(a) => this.input = a}/>
-            <button type="submit">Save</button>
+                <input type="text" id="ToDo" ref={(a) => this.input = a}/>
+                <button type="submit">Save</button>
             </form>  
-            <button type="submit" onClick={this.clear}>clear</button>
-            <this.displayList />
-            </div>
+            <a href="/" onClick={this.clear}>Clear</a>
+            {this.state.items.map((todo) => <Display text={todo} />)}
+        </div>
         
     )}
 
-    displayList() {
-        let listOfItems = this.state.items.map((item) => 
-            <li key={item.key}>{item.text}</li>
-        )
-        return (
-            <ul>{listOfItems}</ul>
-        )
-    }
 }
 
 export default InputField
