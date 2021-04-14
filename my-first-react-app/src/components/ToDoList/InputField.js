@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import Display from "./display.js"
 import initialState from "./initialState.js"
 
 class InputField extends Component{
@@ -8,6 +7,7 @@ class InputField extends Component{
         this.state = initialState
         this.saver = this.saver.bind(this)
         this.clear = this.clear.bind(this)
+        this.displayList = this.displayList.bind(this)
     }
 
     saver(event) {
@@ -21,6 +21,7 @@ class InputField extends Component{
         this.setState(initialState)
     }
 
+
     render() {
         return (<div>
             <form onSubmit={this.saver}>
@@ -28,10 +29,19 @@ class InputField extends Component{
             <button type="submit">Save</button>
             </form>  
             <button type="submit" onClick={this.clear}>clear</button>
-            <Display entries={this.state.items} />
+            <this.displayList />
             </div>
         
     )}
+
+    displayList() {
+        let listOfItems = this.state.items.map((item) => 
+            <li key={item.key}>{item.text}</li>
+        )
+        return (
+            <ul>{listOfItems}</ul>
+        )
+    }
 }
 
 export default InputField
