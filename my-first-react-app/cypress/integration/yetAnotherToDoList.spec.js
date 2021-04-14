@@ -7,12 +7,24 @@ describe("Checking functionality of YetAnotherToDoList", function(){
        cy.contains('Yet Another Todo List!')
     })
 
-   it("Shows a textbox", function(){
-       cy.get('#ToDo')
+    it("Can add task to todo list", function(){
+       cy.get("#ToDo").type("start news summary challenge")
+       cy.get("#save-button").click()
+       cy.contains("start news summary challenge")
     })
 
-    it("Shows a save button", function() {
-        
-       cy.get("#save-button")
-    })
+    it("Can clear tasks", function(){
+      cy.get("#ToDo").type("start news summary challenge")
+      cy.get("#save-button").click()
+      cy.get("#clear-link").click()
+      cy.get("#task0").should("not.exist")
+   })
+
+   it("Strikes through text when checkbox is ticked", function(){
+      cy.get("#ToDo").type("start news summary challenge")
+      cy.get("#save-button").click()
+      cy.get("#task0").should("have.css", "text-decoration", "none solid rgb(255, 255, 255)")
+      cy.get("#checkboxtask0").click()
+      cy.get("#task0").should("have.css", "text-decoration", "line-through solid rgb(255, 255, 255)")
+   })
 })

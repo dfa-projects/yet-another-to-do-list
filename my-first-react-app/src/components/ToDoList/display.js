@@ -12,8 +12,8 @@ class Display extends Component {
     render() {
         return (
         <div>
-            <input type="checkbox" onClick={this.checked}/>
-            <span key={Date.now()} style={{textDecoration: this.state.textDecoration}}>{this.props.text}</span>
+            <input type="checkbox" id={`checkbox${this.props.id}`} onClick={this.checked}/>
+            <span key={Date.now()} id={this.props.id} style={{textDecoration: this.state.textDecoration}}>{this.props.text}</span>
         </div>)
     }
 

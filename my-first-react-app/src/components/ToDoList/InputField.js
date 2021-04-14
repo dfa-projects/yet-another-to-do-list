@@ -26,12 +26,13 @@ class InputField extends Component{
     render() {
         return (
         <div>
+            <h1>Yet Another Todo List!</h1>
             <form onSubmit={this.saver}>
                 <input type="text" id="ToDo" ref={(a) => this.input = a}/>
-                <button type="submit">Save</button>
+                <button type="submit" id="save-button">Save</button>
             </form>  
-            <a href="/" onClick={this.clear}>Clear</a>
-            {this.state.items.map((todo) => <Display text={todo} />)}
+            <a href="/" onClick={this.clear} id="clear-link">Clear</a>
+            {this.state.items.map((todo, index) => <Display id={`task${index}`} text={todo} />)}
         </div>
         
     )}
