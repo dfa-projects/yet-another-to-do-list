@@ -19,8 +19,8 @@ test("can type in input field and saves on click", function(){
 test("can clear tasks", function(){
   render(<InputField />)
   userEvent.type(screen.getByRole("textbox"), "do the dishes")
-  userEvent.click(screen.getByText("Save"))
+  userEvent.click(screen.getByRole("button"))
+  const element = screen.getByText("do the dishes")
   userEvent.click(screen.getByRole("link"))
-  const test3 = screen.getByText("do the dishes")
-  expect(test3).not.toBeInTheDocument()
+  expect(element).not.toBeInTheDocument()
 })

@@ -25,7 +25,7 @@ class InputField extends Component{
 
     render() {
         return (
-        <div>
+        <div key="overall div">
             <h1>Yet Another Todo List!</h1>
             <form onSubmit={this.saver}>
                 <input type="text" id="ToDo" ref={(a) => this.input = a}/>
